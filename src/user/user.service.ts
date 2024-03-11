@@ -1,17 +1,17 @@
 import { Injectable } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
-import { v4 as uuidv4 } from 'uuid';
+import { v4 } from 'uuid';
 import { EntityNotFound, AccessDenied } from '../errors';
-import { DBEntities, DBService } from '../db/db.service';
+import { DbService } from '../db/db.service';
 import { UserEntity } from './entity/user.entity';
 
 @Injectable()
 export class UserService {
-  constructor(private db: DBService) {}
+  constructor(private db: DbService) {}
 
   create(createUserDto: CreateUserDto): UserEntity {
-    const id = uuidv4();
+    const id = v4();
     const date = Date.now();
     const user: UserEntity = new UserEntity({
       id,

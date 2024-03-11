@@ -3,11 +3,11 @@ import { CreateArtistDto } from './dto/create-artist.dto';
 import { UpdateArtistDto } from './dto/update-artist.dto';
 import { v4 as uuidv4 } from 'uuid';
 import { EntityNotFound } from '../errors';
-import { DBService } from '../db/db.service';
+import { DbService } from '../db/db.service';
 
 @Injectable()
 export class ArtistService {
-  constructor(private db: DBService) {}
+  constructor(private db: DbService) {}
   create(createArtistDto: CreateArtistDto) {
     const id = uuidv4();
     const artist = Object.assign({ id }, createArtistDto);

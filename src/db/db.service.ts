@@ -6,7 +6,7 @@ import { UserEntity } from '../user/entity/user.entity';
 import { Favorites } from '../favorites/interfaces/favorites.interface';
 import { EntityNotFound } from '../errors';
 
-export const enum DBEntities {
+export const enum DbEntities {
   users = 'users',
   tracks = 'tracks',
   artists = 'artists',
@@ -14,7 +14,7 @@ export const enum DBEntities {
 }
 
 @Injectable()
-export class DBService {
+export class DbService {
   users: UserEntity[] = [];
   tracks: Track[] = [];
   artists: Artist[] = [];
@@ -25,7 +25,7 @@ export class DBService {
     tracks: [],
   };
 
-  checkEntityExist(id, entityType: DBEntities) {
+  checkEntityExist(id, entityType: DbEntities) {
     if (id) {
       const repository: (UserEntity | Track | Artist | Album)[] =
         this[entityType];

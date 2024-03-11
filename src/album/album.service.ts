@@ -3,16 +3,16 @@ import { CreateAlbumDto } from './dto/create-album.dto';
 import { UpdateAlbumDto } from './dto/update-album.dto';
 import { v4 } from 'uuid';
 import { EntityNotFound } from '../errors';
-import { DBEntities, DBService } from '../db/db.service';
-
+import { DbEntities } from '../db/db.service';
+import { DbService } from '../db/db.service';
 @Injectable()
 export class AlbumService {
-  constructor(private db: DBService) {}
+  constructor(private db: DbService) {}
   create(createAlbumDto: CreateAlbumDto) {
     const id = v4();
     const { artistId } = createAlbumDto;
 
-    this.db.checkEntityExist(artistId, DBEntities.artists);
+    this.db.checkEntityExist(artistId, DbEntities.artists);
 
     const album = Object.assign({ id }, createAlbumDto);
     this.db.albums.push(album);
@@ -26,9 +26,9 @@ export class AlbumService {
   findOne(id: string) {
     const album = this.db.albums.find((album) => album.id === id);
 
-    if (!album) {
+/*     if (!album) {
       throw new EntityNotFound();
-    }
+    } */
 
     return album;
   }
@@ -37,7 +37,7 @@ export class AlbumService {
     const album = this.findOne(id);
     const { artistId } = updateAlbumDto;
 
-    this.db.checkEntityExist(artistId, DBEntities.artists);
+    this.db.checkEntityExist(artistId, DbEntities.artists);
 
     Object.assign(album, updateAlbumDto);
 

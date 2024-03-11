@@ -3,17 +3,17 @@ import { CreateTrackDto } from './dto/create-track.dto';
 import { UpdateTrackDto } from './dto/update-track.dto';
 import { v4 as uuidv4 } from 'uuid';
 import { EntityNotFound } from '../errors';
-import { DBEntities, DBService } from '../db/db.service';
+import { DbEntities, DbService } from '../db/db.service';
 
 @Injectable()
 export class TrackService {
-  constructor(private db: DBService) {}
+  constructor(private db: DbService) {}
   create(createTrackDto: CreateTrackDto) {
     const id = uuidv4();
     const { albumId, artistId } = createTrackDto;
 
-    this.db.checkEntityExist(albumId, DBEntities.albums);
-    this.db.checkEntityExist(artistId, DBEntities.artists);
+    this.db.checkEntityExist(albumId, DbEntities.albums);
+    this.db.checkEntityExist(artistId, DbEntities.artists);
 
     const track = Object.assign({ id }, createTrackDto);
     this.db.tracks.push(track);
@@ -39,8 +39,8 @@ export class TrackService {
     const track = this.findOne(id);
     const { albumId, artistId } = updateTrackDto;
 
-    this.db.checkEntityExist(albumId, DBEntities.albums);
-    this.db.checkEntityExist(artistId, DBEntities.artists);
+    this.db.checkEntityExist(albumId, DbEntities.albums);
+    this.db.checkEntityExist(artistId, DbEntities.artists);
 
     Object.assign(track, updateTrackDto);
 

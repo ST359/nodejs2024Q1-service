@@ -16,7 +16,7 @@ import {
   import { UpdateAlbumDto } from './dto/update-album.dto';
   import { StatusCodes } from 'http-status-codes';
   import { EntityNotFound } from '../errors';
-  import { DBEntities } from '../db/db.service';
+  import { DbEntities } from '../db/db.service';
   
   @Controller('album')
   export class AlbumController {
@@ -39,6 +39,7 @@ import {
     }
   
     @Get(':id')
+    @HttpCode(StatusCodes.CREATED)
     findOne(@Param('id', new ParseUUIDPipe({ version: '4' })) id: string) {
       try {
         return this.albumService.findOne(id);
@@ -58,7 +59,7 @@ import {
         return this.albumService.update(id, updateAlbumDto);
       } catch (error) {
         if (error instanceof EntityNotFound) {
-          if (error.message.endsWith(DBEntities.albums)) {
+          if (error.message.endsWith(DbEntities.albums)) {
             throw new NotFoundException(error.message);
           }
           throw new UnprocessableEntityException(error.message);

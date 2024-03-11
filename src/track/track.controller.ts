@@ -16,7 +16,7 @@ import {
   import { UpdateTrackDto } from './dto/update-track.dto';
   import { StatusCodes } from 'http-status-codes';
   import { EntityNotFound } from '../errors';
-  import { DBEntities } from '../db/db.service';
+  import { DbEntities } from '../db/db.service';
   
   @Controller('track')
   export class TrackController {
@@ -58,7 +58,7 @@ import {
         return this.trackService.update(id, updateTrackDto);
       } catch (error) {
         if (error instanceof EntityNotFound) {
-          if (error.message.endsWith(DBEntities.tracks)) {
+          if (error.message.endsWith(DbEntities.tracks)) {
             throw new NotFoundException(error.message);
           }
           throw new UnprocessableEntityException(error.message);
