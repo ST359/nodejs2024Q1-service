@@ -17,9 +17,7 @@ export class UserService {
       id,
       ...createUserDto,
       version: 1,
-      createdAt: date,
-      updatedAt: date,
-    });
+    }, date);
     this.db.users.push(user);
 
     return user;

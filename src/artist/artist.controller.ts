@@ -56,7 +56,7 @@ import {
     }
   
     @Delete(':id')
-    @HttpCode(StatusCodes.CREATED)
+    @HttpCode(StatusCodes.NO_CONTENT)
     remove(@Param('id', new ParseUUIDPipe({ version: '4' })) id: string) {
       try {
         this.artistService.remove(id);

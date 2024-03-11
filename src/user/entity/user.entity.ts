@@ -10,10 +10,12 @@ export class UserEntity implements User {
     createdAt: number;
     updatedAt: number;
     
-    constructor(partial: Partial<UserEntity>){
+    constructor(partial: Partial<UserEntity>, date: number){
         this.id = partial.id;
-        this.login = partial.id;
+        this.login = partial.login;
         this.password = partial.password;
         this.version = partial.version;
+        this.createdAt = date;
+        this.updatedAt = date;
     }
 }

@@ -39,7 +39,6 @@ import {
     }
   
     @Get(':id')
-    @HttpCode(StatusCodes.CREATED)
     findOne(@Param('id', new ParseUUIDPipe({ version: '4' })) id: string) {
       try {
         return this.albumService.findOne(id);

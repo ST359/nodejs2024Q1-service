@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { CreateTrackDto } from './dto/create-track.dto';
 import { UpdateTrackDto } from './dto/update-track.dto';
-import { v4 as uuidv4 } from 'uuid';
+import { v4 } from 'uuid';
 import { EntityNotFound } from '../errors';
 import { DbEntities, DbService } from '../db/db.service';
 
@@ -9,7 +9,7 @@ import { DbEntities, DbService } from '../db/db.service';
 export class TrackService {
   constructor(private db: DbService) {}
   create(createTrackDto: CreateTrackDto) {
-    const id = uuidv4();
+    const id = v4();
     const { albumId, artistId } = createTrackDto;
 
     this.db.checkEntityExist(albumId, DbEntities.albums);

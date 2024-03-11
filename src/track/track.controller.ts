@@ -58,16 +58,13 @@ import {
         return this.trackService.update(id, updateTrackDto);
       } catch (error) {
         if (error instanceof EntityNotFound) {
-          if (error.message.endsWith(DbEntities.tracks)) {
             throw new NotFoundException(error.message);
-          }
-          throw new UnprocessableEntityException(error.message);
         }
       }
     }
   
     @Delete(':id')
-    @HttpCode(StatusCodes.NO_CONTENT)
+    @HttpCode(StatusCodes.CREATED)
     remove(@Param('id', new ParseUUIDPipe({ version: '4' })) id: string) {
       try {
         return this.trackService.remove(id);

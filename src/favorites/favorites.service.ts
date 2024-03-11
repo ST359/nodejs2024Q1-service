@@ -4,7 +4,6 @@ import { Artist } from '../artist/interfaces/artist.interface';
 import { Track } from '../track/interfaces/track.interface';
 import { Album } from '../album/interfaces/album.interface';
 import { EntityNotFound } from '../errors';
-
 enum Entites {
   tracks = 'tracks',
   albums = 'albums',
